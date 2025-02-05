@@ -150,10 +150,6 @@
       const _ = () => {
         const container = document.querySelector("#container");
         const form = document.querySelector("#controller");
-        const resetButton = document.querySelector("#resetButton");
-
-        // "저장된 데이터 리셋" 버튼 클릭 시 데이터 리셋
-        resetButton.addEventListener("click", () => (data.length = 0));
 
         const data = new Proxy([], {
           set(target, property, value) {
@@ -190,7 +186,7 @@
             // 추천된 점심 메뉴 이미지 삽입
             const menuImage = document.createElement("img");
             menuImage.id = "menuImage";
-            menuImage.src = "https://github.com/23MinL/recommendation_lunch/blob/main/docs/menu.jpg?raw=true"; // 임시 이미지
+            menuImage.src = "https://via.placeholder.com/600x300?text=%EC%A0%90%EC%8B%AC+%EB%A9%94%EB%89%B4"; // 임시 이미지
             card.appendChild(menuImage);
 
             // "삭제" 버튼 클릭 시 해당 항목 삭제
