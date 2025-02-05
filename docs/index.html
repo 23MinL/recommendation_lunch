@@ -3,24 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>점심 메뉴 추천</title>
+    <title>점메추</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
+        font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 0;
         background-color: #f4f4f9;
+        color: #333;
       }
       header {
         background-color: #ffeb3b;
-        padding: 10px;
+        padding: 20px;
         text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        border-bottom: 2px solid #ddd;
+      }
+      header h1 {
+        margin: 0;
+        color: #333;
+        font-size: 30px;
+      }
+      header p {
+        margin: 5px;
+        font-size: 14px;
+        color: #555;
       }
       #controller {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 20px;
+        background-color: #fff;
+        margin: 20px auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
       }
       textarea {
         width: 80%;
@@ -29,13 +49,19 @@
         padding: 10px;
         border-radius: 5px;
         border: 1px solid #ddd;
+        font-size: 16px;
+      }
+      select, button {
+        width: 80%;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
       }
       button {
-        padding: 10px 20px;
         background-color: #4caf50;
         color: white;
-        border: none;
-        border-radius: 5px;
         cursor: pointer;
       }
       button:hover {
@@ -44,33 +70,44 @@
       #container {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
         margin: 20px auto;
         max-width: 600px;
         padding: 20px;
       }
       .menu-card {
         background-color: #fff;
-        padding: 15px;
+        padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
         align-items: center;
+        text-align: center;
+      }
+      .menu-card h3 {
+        margin: 10px 0;
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
       }
       .menu-card button {
-        margin-top: 10px;
+        margin-top: 15px;
         background-color: #f44336;
-      }
-      .menu-card code {
-        display: block;
-        background-color: #f9f9f9;
+        color: white;
         padding: 10px;
         border-radius: 5px;
-        margin-top: 10px;
+        border: none;
+        cursor: pointer;
+      }
+      .menu-card button:hover {
+        background-color: #e53935;
       }
       #resetButton {
         background-color: #ff9800;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
       }
       #menuImage {
         max-width: 100%;
@@ -78,21 +115,27 @@
         margin-top: 20px;
         border-radius: 8px;
       }
+      .emoji {
+        font-size: 30px;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body>
     <header>
-      <button id="resetButton">저장된 데이터 리셋</button>
+      <h1>점메추 🍱</h1>
+      <p>오늘 점심 뭐 먹을지 고민되시죠? 제가 추천해 드릴게요!</p>
     </header>
     <form id="controller">
+      <div class="emoji">🤔</div>
       <label for="modelOption">모델 선택:</label>
       <select name="modelOption" id="modelOption">
-        <option value="1">gemini-1.5-flash</option>
-        <option value="2">deepseek-r1</option>
+        <option value="1">Gemini - 메뉴 추천 🤖</option>
+        <option value="2">DeepSeek - 다양한 메뉴 🍲</option>
       </select>
       <label for="textData">입력:</label>
       <textarea name="textData" id="textData" placeholder="점심 메뉴에 대해 이야기해 보세요!"></textarea>
-      <button type="submit">등록</button>
+      <button type="submit">등록 🍽️</button>
     </form>
     <div id="container"></div>
     <script>
@@ -124,8 +167,9 @@
             const card = document.createElement("div");
             card.classList.add("menu-card");
             card.innerHTML = ` 
+              <h3>메뉴 추천 📋</h3>
               <div>${d.text}</div>
-              <button>삭제</button>
+              <button>삭제 ❌</button>
             `;
             if (d.reply) {
               const box = document.createElement("div");
@@ -138,7 +182,7 @@
             // 추천된 점심 메뉴 이미지 삽입
             const menuImage = document.createElement("img");
             menuImage.id = "menuImage";
-            menuImage.src = "https://via.placeholder.com/600x300?text=%EC%A0%90%EC%8B%AC+%EB%A9%94%EB%89%B4"; // 임시 이미지 (나중에 실제 이미지로 교체)
+            menuImage.src = "https://via.placeholder.com/600x300?text=%EC%A0%90%EC%8B%AC+%EB%A9%94%EB%89%B4"; // 임시 이미지
             card.appendChild(menuImage);
 
             // "삭제" 버튼 클릭 시 해당 항목 삭제
